@@ -141,24 +141,41 @@
 .cart span {
   position: absolute;
   font-weight: bold;
-  top: 0px;
+  top: 8.5px;
   font-size: 20px;
   background-color: #1a1a1a;
-  left: 16px;
+  left: 23px;
   color: orange;
 }
 
+
+a {
+    text-decoration: none; 
+    color: #ffffff;
+    display: inline-block; 
+    padding: 8px; 
+    transition: border 0.3s, background-color 0.3s; 
+  }
+
+/* Hover effect for links */
 a:hover {
   border: 1px solid #ffffff;
   border-radius: 3px;
   padding: 8px;
 }
 
+
+.header_delivery,
+.header_language_dropdown {
+  display: inline-block; 
+  padding: 8px; 
+  transition: border 0.3s; 
+}
+
 /* Hover effect for delivery section */
 .header_delivery:hover,
 .header_language_dropdown:hover {
   border: 1px solid #ffffff;
-  padding: 8px;
   border-radius: 3px;
 }
 
@@ -177,18 +194,22 @@ a:hover {
 }
 
 .nav_item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
-}
-
-.nav_item:hover {
-  color: #febd69;
-  border: 1px solid #ffffff;
-  padding: 8px;
-  border-radius: 2px;
-}
+    display: flex; 
+    align-items: center; 
+    gap: 5px; 
+    cursor: pointer; 
+    padding: 7px;
+    transition: color 0.3s, border 0.3s, background-color 0.3s; 
+    border-radius: 2px; 
+  }
+  
+  /* Hover effect for navigation items */
+  .nav_item:hover {
+    color: #febd69;
+    border: 1px solid #ffffff; 
+    background-color: rgba(255, 255, 255, 0.1); 
+  }
+  
 .menu_icon {
   font-size: 1.2rem;
 }
