@@ -2,6 +2,7 @@ import React from "react";
 import { BsSearch } from "react-icons/bs";
 import { BiCart } from "react-icons/bi";
 import { SlLocationPin } from "react-icons/sl";
+import { Link } from "react-router-dom"; // Import Link
 import classes from "./Header.module.css";
 import LowerHeader from "./LowerHeader";
 
@@ -11,15 +12,15 @@ function Header() {
       <header className={classes.header}>
         <div className={classes.header_top}>
           <div className={classes.header_logo}>
-            {/* logo */}
-            <a href="#" aria-label="Amazon Home">
+            {/* Logo */}
+            <Link to="/" aria-label="Amazon Home">
               <img
                 src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
                 alt="Amazon Logo"
                 className={classes.header_logo_image}
               />
-            </a>
-            {/* delivery */}
+            </Link>
+            {/* Delivery */}
             <span
               className={classes.header_location_icon}
               aria-label="Location"
@@ -31,6 +32,7 @@ function Header() {
               <span>Portland 97230</span>
             </div>
           </div>
+
           <div className={classes.header_search}>
             <select
               name="categories"
@@ -52,7 +54,8 @@ function Header() {
               aria-label="Search"
             />
           </div>
-          {/* right side link */}
+
+          {/* Right Side Links */}
           <nav className={classes.header_links}>
             <div className={classes.header_language}>
               <img
@@ -67,9 +70,10 @@ function Header() {
                 <option value="EN">EN</option>
               </select>
             </div>
-            {/* three components */}
-            <a
-              href="#"
+
+            {/* Sign In */}
+            <Link
+              to="/auth"
               className={classes.header_account}
               aria-label="Account and Lists"
             >
@@ -77,22 +81,28 @@ function Header() {
                 <p>Sign In</p>
                 <p>Account & Lists</p>
               </div>
-            </a>
-            {/* order */}
-            <a
-              href="#"
+            </Link>
+
+            {/* Orders */}
+            <Link
+              to="/orders"
               className={classes.header_orders}
               aria-label="Returns and Orders"
             >
               <p>Returns</p>
               <p>& Orders</p>
-            </a>
-            {/* cart */}
+            </Link>
+
+            {/* Cart */}
             <div className={classes.header_cart}>
-              <a href="" className={classes.cart}>
+              <Link
+                to="/cart"
+                className={classes.cart}
+                aria-label="Shopping Cart"
+              >
                 <BiCart size={35} />
                 <span>0</span>
-              </a>
+              </Link>
             </div>
           </nav>
         </div>
