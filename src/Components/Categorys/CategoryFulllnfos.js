@@ -1,28 +1,32 @@
 export const CategoryFulllnfos = [
-    {
-      id: 1, 
-      title: "Electronics",
-      name: "electronics",
-      image: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
-    },
-    {
-      id: 2, 
-      title: "Discovery fashion",
-      name: "fashion",
-      image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
-    },
-    {
-      id: 3,
-      title: "Jewelry",
-      name: "jewelry",
-      image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
-    },
-    {
-      id: 4,
-      title: "Laptop",
-      name: "laptop",
-      image:
-        "https://storage.googleapis.com/fir-auth-1c3bc.appspot.com/1694242482686-81V5P1x+LSL._SL1500_.jpg",
-    },
-  ];
-  
+  {
+    id: 1,
+    title: "Electronics",
+    name: "electronics",
+    category: "electronics",
+    image: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
+  },
+  {
+    id: 2,
+    title: "Jewelery",
+    name: "jewelery", 
+    category: "jewelery", 
+    image: "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
+  },
+  {
+    id: 3,
+    title: "Men's Clothing",
+    name: "men's clothing",
+    category: "men's clothing",
+    image:
+      "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+  },
+  {
+    id: 4,
+    title: "Women's Clothing",
+    name: "women's clothing",
+    category: "women's clothing",
+    image:
+      "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
+  },
+];

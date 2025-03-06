@@ -5,6 +5,7 @@ import Signup from "./src/Pages/Auth/Signup";
 import Payment from "./src/Pages/Payment/Payment";
 import Orders from "./src/Pages/Orders/Orders";
 import Cart from "./src/Pages/Cart/Cart";
+import Results from "./src/Pages/Results/Results";
 
 function AppRouter() {
   return (
@@ -14,6 +15,7 @@ function AppRouter() {
         <Route path="/auth" element={<Signup />} />
         <Route path="/payments" element={<Payment />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/category/:categoryName" element={<Results />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
