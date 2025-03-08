@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BsSearch } from "react-icons/bs";
 import { BiCart } from "react-icons/bi";
 import { SlLocationPin } from "react-icons/sl";
 import { Link } from "react-router-dom"; // Import Link
 import classes from "./Header.module.css";
 import LowerHeader from "./LowerHeader";
+import { DataContext } from "../DataProvider/DataProvider"; // ✅ Added DataContext
 
 function Header() {
+  
+  const { state, dispatch } = useContext(DataContext);
+const { basket } = state;
+
+
   return (
     <>
       <header className={classes.header}>
@@ -101,7 +107,7 @@ function Header() {
                 aria-label="Shopping Cart"
               >
                 <BiCart size={35} />
-                <span>0</span>
+                <span> {basket.length} </span>
               </Link>
             </div>
           </nav>

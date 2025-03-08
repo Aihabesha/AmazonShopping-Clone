@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useContext } from "react"; // ✅ Import useContext
 import Rating from "@mui/material/Rating";
 import CurrencyFormat from "../CurrencyFormat/CurrencyFormat";
 import styles from "./Product.module.css"; // Import the module
 import { Link } from "react-router-dom";
+import { DataContext } from "../DataProvider/DataProvider";
+import { type } from "../../Utility/action.type";
 
-function ProductCard({ product, renderDescription = false }) { // ✅ Added renderDescription as a prop
-  const { id, title, image, price, rating, description } = product; // ✅ Added description from product
+function ProductCard({ product, renderDescription = false }) {
+  const { id, title, image, price, rating, description } = product;
+
+  const { state, dispatch } = useContext(DataContext); // ✅ Fix destructuring
+  const { basket } = state; // ✅ Extract basket properly
+
+  const addTocart = () => {
+    dispatch({
+      type: type.ADD_TO_BASKET,
+      item: {
+        id,
+        title,
+        image,
+        price,
+        rating,
+        description,
+      },
+    });
+  };
 
   return (
     <div className={styles.productCard}>
@@ -14,8 +33,9 @@ function ProductCard({ product, renderDescription = false }) { // ✅ Added rend
       </Link>
       <h3 className={styles.productTitle}>{title}</h3>
 
-      {renderDescription && <div className={styles.description}>{description}</div>} 
-      {/* ✅ Fixed the description rendering */}
+      {renderDescription && (
+        <div className={styles.description}>{description}</div>
+      )}
 
       <div className={styles.rating}>
         <Rating value={rating?.rate} precision={0.1} readOnly />
@@ -24,10 +44,7 @@ function ProductCard({ product, renderDescription = false }) { // ✅ Added rend
       <div className={styles.price}>
         <CurrencyFormat value={price} />
       </div>
-      <button
-        className={styles.addToCartButton}
-        onClick={() => console.log(`Added ${title} to cart`)}
-      >
+      <button className={styles.addToCartButton} onClick={addTocart}>
         Add to Cart
       </button>
     </div>
