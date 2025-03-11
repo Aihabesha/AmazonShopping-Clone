@@ -1,0 +1,110 @@
+:root {
+    --primary-color: #ff9900;
+    --primary-shade: #e68a00;
+    --background-color: #f2f1f1;
+    --border-color: rgb(193, 193, 193);
+    --text-color: #333;
+    --padding: 20px;
+    --gap: 20px;
+}
+
+.container {
+    display: flex;
+    gap: var(--gap);
+    margin-top: var(--padding);
+    flex-wrap: wrap; 
+}
+
+.cart_container {
+    padding: var(--padding);
+    flex: 1 1 300px; /* Responsive flex property */
+}
+
+.cart_container h2,
+.cart_container h3 {
+    padding: 10px 0;
+    color: var(--text-color);
+}
+
+.cart_container hr {
+    margin: 10px 0;
+    border: 1px solid var(--border-color);
+}
+
+.subtotal {
+    padding: var(--padding);
+    min-width: 300px;
+    height: 80%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap);
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    border-radius: 5px;
+}
+
+.subtotal p {
+    font-weight: bold; 
+    padding: 10px 0;
+
+}
+
+.subtotal a {
+    text-align: center;
+    width: 100%;
+    border: none;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    padding: 10px; /* Increased padding for better touch area */
+    text-decoration: none;
+    color: white;
+    font-weight: bold; /* Made link text bold */
+    transition: background-color 0.3s; /* Smooth transition effect */
+}
+
+.subtotal a:hover {
+    background: var(--primary-shade);
+}
+
+.subtotal span {
+    display: flex;
+    gap: var(--gap);
+    align-items: center; /* Center the checkbox and label */
+}
+
+input[type="checkbox"] {
+    cursor: pointer; /* Change cursor on hover */
+}
+
+label {
+    cursor: pointer; /* Change cursor on hover */
+}
+
+.cart_product {
+    display: flex;
+    gap: 10px;
+    align-items: center; /* Align items vertically in the center */
+    margin-bottom: 20px; /* Space between cart items */
+    border: 1px solid #e0e0e0; /* Light border around the product */
+    padding: 10px; /* Padding inside the product card */
+    border-radius: 5px; /* Slightly rounded corners */
+}
+
+.cart_product button {
+    background-color: #ff9900;; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    padding: 5px 10px; /* Padding inside the button */
+    border-radius: 5px; /* Slightly rounded corners for buttons */
+    cursor: pointer; /* Cursor changes to pointer on hover */
+}
+
+.cart_product button:hover {
+    background-color: #3d372d;; /* Darker blue on hover */
+}
+
+.cart_product span {
+    font-weight: bold; /* Make the quantity bold */
+    margin: 0 10px; /* Margin around the quantity display */
+}

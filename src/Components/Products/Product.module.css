@@ -7,6 +7,7 @@
     padding: 20px;
   }
   
+  
   /* Individual product card */
   .productCard {
     width: 250px;
@@ -58,6 +59,7 @@
   
   /* Add to Cart button */
   .addToCartButton {
+    display: none;
     width: 100%;
     padding: 10px;
     font-size: 14px;
@@ -67,9 +69,28 @@
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s;
+    z-index: 100;
+    
   }
+
+  .productCard:hover .addToCartButton {
+    display: block; /* Show the button on hover */
+  }
+
+  .addToCartButton {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+  
+  .productCard:hover .addToCartButton {
+    opacity: 1;
+    visibility: visible;
+  }
+  
   
   .addToCartButton:hover {
     background-color: #e65c00;
   }
   
+

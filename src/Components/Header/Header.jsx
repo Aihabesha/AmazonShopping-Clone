@@ -5,16 +5,27 @@ import { SlLocationPin } from "react-icons/sl";
 import { Link } from "react-router-dom"; // Import Link
 import classes from "./Header.module.css";
 import LowerHeader from "./LowerHeader";
-import { DataContext } from "../DataProvider/DataProvider"; // ✅ Added DataContext
+import { DataContext } from "../DataProvider/DataProvider"; // ✅ Import DataContext
 
 function Header() {
-  
-  const { state, dispatch } = useContext(DataContext);
-const { basket } = state;
+  const contextValue = useContext(DataContext);
 
+  if (!contextValue) {
+    console.error("🚨 Error: DataContext is undefined. Ensure DataProvider wraps App.");
+    return <p>Error: DataContext not found!</p>;
+  }
+
+  const { state, dispatch } = contextValue; // ✅ Safe destructuring
+
+  if (!state) {
+    console.error("🚨 Error: state is undefined.");
+    return <p>Error: State not available!</p>;
+  }
+
+  const { basket } = state || { basket: [] }; // ✅ Safe fallback for basket
 
   return (
-    <>
+    <section className={classes.fixed}>
       <header className={classes.header}>
         <div className={classes.header_top}>
           <div className={classes.header_logo}>
@@ -27,10 +38,7 @@ const { basket } = state;
               />
             </Link>
             {/* Delivery */}
-            <span
-              className={classes.header_location_icon}
-              aria-label="Location"
-            >
+            <span className={classes.header_location_icon} aria-label="Location">
               <SlLocationPin />
             </span>
             <div className={classes.header_delivery}>
@@ -40,11 +48,7 @@ const { basket } = state;
           </div>
 
           <div className={classes.header_search}>
-            <select
-              name="categories"
-              id="categories"
-              className={classes.header_search_dropdown}
-            >
+            <select name="categories" id="categories" className={classes.header_search_dropdown}>
               <option value="All">All</option>
             </select>
             <input
@@ -55,10 +59,7 @@ const { basket } = state;
               className={classes.header_search_input}
               aria-label="Search Amazon"
             />
-            <BsSearch
-              className={classes.header_search_icon}
-              aria-label="Search"
-            />
+            <BsSearch className={classes.header_search_icon} aria-label="Search" />
           </div>
 
           {/* Right Side Links */}
@@ -69,20 +70,13 @@ const { basket } = state;
                 alt="US Flag"
                 className={classes.header_language_flag}
               />
-              <select
-                className={classes.header_language_dropdown}
-                aria-label="Language"
-              >
+              <select className={classes.header_language_dropdown} aria-label="Language">
                 <option value="EN">EN</option>
               </select>
             </div>
 
             {/* Sign In */}
-            <Link
-              to="/auth"
-              className={classes.header_account}
-              aria-label="Account and Lists"
-            >
+            <Link to="/auth" className={classes.header_account} aria-label="Account and Lists">
               <div>
                 <p>Sign In</p>
                 <p>Account & Lists</p>
@@ -90,31 +84,23 @@ const { basket } = state;
             </Link>
 
             {/* Orders */}
-            <Link
-              to="/orders"
-              className={classes.header_orders}
-              aria-label="Returns and Orders"
-            >
+            <Link to="/orders" className={classes.header_orders} aria-label="Returns and Orders">
               <p>Returns</p>
               <p>& Orders</p>
             </Link>
 
             {/* Cart */}
             <div className={classes.header_cart}>
-              <Link
-                to="/cart"
-                className={classes.cart}
-                aria-label="Shopping Cart"
-              >
+              <Link to="/cart" className={classes.cart} aria-label="Shopping Cart">
                 <BiCart size={35} />
-                <span> {basket.length} </span>
+                <span> {basket?.length || 0} </span>
               </Link>
             </div>
           </nav>
         </div>
       </header>
       <LowerHeader />
-    </>
+    </section>
   );
 }
 

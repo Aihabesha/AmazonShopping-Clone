@@ -20,7 +20,7 @@ function Product() {
   return (
     <section className={styles.productContainer}>
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard key={product.id} product={product} renderAdd={true}   />
       ))}
     </section>
   );

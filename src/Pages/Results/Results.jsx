@@ -52,7 +52,8 @@ function Results() {
         <div className={classes.products__container}>
           {products.length > 0 ? (
             products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} renderDescription={false}
+              rendrAdd={true}/>
             ))
           ) : (
             <p style={{ padding: "30px" }}>No products found.</p>
