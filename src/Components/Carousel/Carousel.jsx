@@ -1,26 +1,26 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
-import { data } from "./img/data.js";
+import { data as img } from "./img/data";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import classes from './Carousel.module.css'; // Adjust the path as necessary
+import styles from "./Carousel.module.css";
 
-function CarouselComp() {
+function CarouselEffect() {
   return (
     <div>
       <Carousel
-        autoPlay
-        infiniteLoop
-        showStatus={false}
+        autoPlay={true}
+        infiniteLoop={true}
         showIndicators={false}
         showThumbs={false}
+        // dynamicHeight={false}
       >
-        {data.map((imgSrc, index) => (
-          <img src={imgSrc} key={index} alt={`Slide ${index}`} />
-        ))}
+        {img?.map((imageItemLink, i) => {
+          return <img key={i} src={imageItemLink} alt="" />;
+        })}
       </Carousel>
-      <div className={classes.hero__img}></div>
+      <div className={styles.hero_img}></div>
     </div>
   );
 }
 
-export default CarouselComp;
+export default CarouselEffect;

@@ -1,45 +1,15 @@
-/* Container to ensure the styles are scoped properly */
-.carouselContainer {
+.hero_img{
     position: relative;
-    width: 100%;
 }
-
-/* Gradient overlay */
-.hero__img {
+.hero_img::before{
+    content: "";
     position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    /* z-index: 2; */
-    pointer-events: none;
-    background: linear-gradient(
+    height: 250px;
+    background-image: linear-gradient(
         to bottom,
-        rgba(255, 255, 255, 0) 50%, 
-        rgba(36, 36, 36, 0.7) 100%
+        rgba(225, 225, 225, 0),
+        rgb(255, 255, 255)
     );
 }
-
-/* Styling for images inside the CarouselComp */
-.carouselContainer .carousel .slide img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-/* Responsive styling */
-@media (max-width: 768px) {
-    .hero__img {
-        background: linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0) 30%,
-            rgba(0, 0, 0, 0.8) 100%
-        );
-    }
-}   
-
-
-
-
-
-

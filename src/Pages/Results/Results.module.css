@@ -1,11 +1,11 @@
-/* Results.module.css */
-
-/* Main container for products */
-.products__container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 30px;
-    justify-items: center;
-  }
-  
+.products_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  max-width: 1200px;
+  margin: 100px auto 100px auto;
+  gap: 50px;
+  justify-items: center;
+}
+.products_container section {
+  margin: 0 auto;
+}

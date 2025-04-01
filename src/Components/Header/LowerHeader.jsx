@@ -1,20 +1,33 @@
 import React from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import styles from "./Header.module.css"; // Import from Header.module.css
+import { AiOutlineMenu } from "react-icons/ai";
+import classes from "./Header.module.css";
+import { Link } from "react-router-dom"; // Updated to react-router-dom
 
 function LowerHeader() {
   return (
-    <div className={styles.lower_header}>
-      <ul className={styles.nav_list}>
-        <li className={styles.nav_item}>
-          <GiHamburgerMenu className={styles.menu_icon} />
-          <p>All</p>
+    <div className={classes.lower_container}>
+      <ul>
+        <li>
+          <Link to="">
+            <AiOutlineMenu fontWeight={800} fontSize={24} />
+            All
+          </Link>
         </li>
-        <li className={styles.nav_item}>Today's Deals</li>
-        <li className={styles.nav_item}>Customer Service</li>
-        <li className={styles.nav_item}>Registry</li>
-        <li className={styles.nav_item}>Gift Cards</li>
-        <li className={styles.nav_item}>Sell</li>
+        <li>
+          <Link to="">Today's Deals</Link>
+        </li>
+        <li>
+          <Link to="">Customer Service</Link>
+        </li>
+        <li>
+          <Link to="">Registry</Link>
+        </li>
+        <li>
+          <Link to="">Gift Cards</Link>
+        </li>
+        <li>
+          <Link to="">Sell</Link>
+        </li>
       </ul>
     </div>
   );

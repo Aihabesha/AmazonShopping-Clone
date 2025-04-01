@@ -1,14 +1,13 @@
 import React from "react";
-import { CategoryFulllnfos } from "./CategoryFulllnfos";
+import { categoryInfo } from "./CategoryFulllnfos";
 import CategoryCard from "./CategoryCard";
-import classes from "./Category.module.css";
-
+import classes from "./Category.module.css"
 
 function Category() {
   return (
-    <section className={classes.category__container}>
-      {CategoryFulllnfos.map((infos) => (
-        <CategoryCard key={infos.id} data={infos} />
+    <section className={classes.category_container}>
+      {categoryInfo.map((infos, index) => (
+        <CategoryCard key={index} data={infos} />
       ))}
     </section>
   );

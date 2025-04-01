@@ -1,59 +1,46 @@
 import React, { useEffect, useState } from "react";
 import classes from "./ProductDetail.module.css";
-import Layout from "../../Components/Layout/Layout";
-import { useParams } from "react-router-dom";
+import LayOut from "../../Components/LayOut/LayOut";
 import axios from "axios";
-import { productUrl } from "../../Api/endPoints";
 import ProductCard from "../../Components/Products/ProductCard";
+import { useParams } from "react-router";
+import { productUrl } from "../../Api/endPoints";
 import Loader from "../../Components/Loader/Loader";
 
 function ProductDetail() {
+  const [product, setProduct] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { productId } = useParams();
-  const [product, setProduct] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
     axios
       .get(`${productUrl}/products/${productId}`)
-      .then((response) => {
-        setProduct(response.data);
+      .then((res) => {
+        setProduct(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.error("Error fetching product:", err);
-      })
-      .finally(() => {
+        console.log(err);
         setIsLoading(false);
       });
-  }, [productId]);
+  }, []);
 
   return (
-    <Layout>
-      {isLoading ? (
-        <div className={classes.loaderContainer}>
+    <>
+      <LayOut>
+        {isLoading ? (
           <Loader />
-        </div>
-      ) : (
-        <div className={classes.productDetailContainer}>
-          <h1 className={classes.productTitle}>{product?.title}</h1>
-          <img
-            className={classes.productImage}
-            src={product?.image}
-            alt={product?.title}
+        ) : (
+          <ProductCard
+            product={product}
+            flex={true}
+            renderDesc={true}
+            renderAdd={true}
           />
-          <div className={classes.productInfo}>
-            <span className={classes.productPrice}>${product?.price}</span>
-            <div className={classes.productRating}>
-              <span>
-                ⭐ {product?.rating?.rate} ({product?.rating?.count} reviews)
-              </span>
-            </div>
-          </div>
-          <p className={classes.productDescription}>{product?.description}</p>
-          <button className={classes.addToCartButton}>Add to Cart</button>
-        </div>
-      )}
-    </Layout>
+        )}
+      </LayOut>
+    </>
   );
 }
 

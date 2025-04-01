@@ -1,100 +1,93 @@
 import React, { useContext } from "react";
-import Layout from "../../Components/Layout/Layout";
-import { DataContext } from "../../Components/DataProvider/DataProvider";
-import ProductCard from "../../Components/Products/ProductCard";
-import { Link } from "react-router-dom";
-import CurrencyFormat from "../../Components/CurrencyFormat/CurrencyFormat";
 import classes from "./Cart.module.css";
-import { type } from "../../Utility/action.type";
+import LayOut from "../../Components/LayOut/LayOut";
+import ProductCard from "../../Components/Products/ProductCard";
+import { DataContext } from "../../Components/DataProvider/DataProvider";
+import CurrencyFormat from "../../Components/CurrencyFormat/CurrencyFormat";
+import { Link } from "react-router";
+import { Type } from "../../Utility/action.type";
+import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 
 function Cart() {
-  const contextValue = useContext(DataContext);
+  const [{ basket, user }, dispatch] = useContext(DataContext);
+  const total = basket.reduce((amount, item) => {
+    return item.price * item.amount + amount;
+  }, 0);
 
-  if (!contextValue) {
-    console.error("🚨 Error: DataContext is undefined.");
-    return <p>Error: DataContext not found!</p>;
-  }
-
-  const { state, dispatch } = contextValue; // Get dispatch from context
-  const { basket } = state;
-
-  console.log("🛒 Basket contents:", basket);
+  // console.log(basket);
 
   const increment = (item) => {
     dispatch({
-      type: type.ADD_TO_BASKET,
+      type: Type.ADD_TO_BASKET,
       item,
     });
   };
-
   const decrement = (id) => {
     dispatch({
-      type: type.REMOVE_FROM_BASKET,
+      type: Type.REMOVE_FROM_BASKET,
       id,
     });
   };
 
-  const totalAmount = basket.reduce((amount, item) => {
-    if (!item || typeof item.price !== "number") {
-      console.error("❌ Error: Invalid item in basket", item);
-      return amount;
-    }
-    return amount + item.price * (item.amount || 1);
-  }, 0);
-
   return (
-    <Layout>
+    <LayOut>
       <section className={classes.container}>
-        <div>
-          <h3 className={classes.cart_container}>Your Shopping Basket</h3>
+        <div className={classes.cart_container}>
+          <h2>Hello</h2>
+          <h3>your shopping basket</h3>
           <hr />
-
-          {basket.length === 0 ? (
-            <p>Oops! No items in your cart</p>
+          {basket?.length == 0 ? (
+            <p>Oops ! No item in your cart</p>
           ) : (
-            <div>
-              {basket.map((item) => (
-                <section className={classes.cart_product} key={item.id}>
+            basket?.map((item, i) => {
+              return (
+                <section className={classes.cart_product}>
                   <ProductCard
+                    key={i}
                     product={item}
-                    renderDescription={true}
+                    renderDesc={true}
                     renderAdd={false}
                     flex={true}
                   />
-                  <div>
-                    <button onClick={() => increment(item)}>+</button>
-                    <span>{ item.amount}</span>
-                    <button onClick={() => decrement(item.id)}>-</button>
+                  <div className={classes.btn_container}>
+                    <button
+                      className={classes.btn}
+                      onClick={() => increment(item)}
+                    >
+                      <IoIosArrowUp size={24}/>
+                    </button>
+                    <span>{item.amount}</span>
+                    <button
+                      className={classes.btn}
+                      onClick={() => {
+                        decrement(item.id);
+                      }}
+                    >
+                      <IoIosArrowDown size={24}/>
+                    </button>
                   </div>
                 </section>
-              ))}
-            </div>
+              );
+            })
           )}
         </div>
 
-        {basket.length > 0 && (
+        {basket?.length !== 0 && (
           <div className={classes.subtotal}>
             <div>
-              <p>Subtotal ({basket.length} items):</p>
-              <CurrencyFormat value={totalAmount} />
+              <p>Subtotal ({basket?.length} items)</p>
+              <CurrencyFormat amount={total} />
             </div>
             <span>
-              <input
-                type="checkbox"
-                id="gift-checkbox"
-                aria-label="This order contains a gift"
-              />
-              <label htmlFor="gift-checkbox">
-                <small>This order contains a gift</small>
-              </label>
+              <input type="checkbox" />
+              <small>This order contains a gift</small>
             </span>
-            <Link to="/payment" className={classes.checkoutLink}>
-              Continue to checkout
-            </Link>
+            <Link to="/payments">Continue to checkout</Link>
           </div>
         )}
       </section>
-    </Layout>
+    </LayOut>
   );
 }
 
