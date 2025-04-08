@@ -8,7 +8,7 @@ import { productUrl } from "../../Api/endPoints";
 import Loader from "../../Components/Loader/Loader";
 
 function ProductDetail() {
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState (null);
   const [isLoading, setIsLoading] = useState(false);
   const { productId } = useParams();
 
@@ -24,7 +24,7 @@ function ProductDetail() {
         console.log(err);
         setIsLoading(false);
       });
-  }, []);
+  }, [productId]);
 
   return (
     <>

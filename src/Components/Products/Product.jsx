@@ -5,7 +5,7 @@ import classes from "./Product.module.css";
 import Loader from "../Loader/Loader";
 
 function Product() {
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -15,30 +15,26 @@ function Product() {
       .then((res) => {
         setProducts(res.data);
         setIsLoading(false);
-        //   console.log(res)
       })
       .catch((err) => {
-        console.log(err);
+        console.error("Error fetching products:", err);
         setIsLoading(false);
       });
   }, []);
+
   return (
     <>
       {isLoading ? (
         <Loader />
       ) : (
         <section className={classes.products_container}>
-          {
-          products?.map((singleProduct) => {
-            return (
-              <ProductCard
-                renderAdd={true}
-                product={singleProduct}
-                key={singleProduct.id}
-              />
-            );
-          })
-          }
+          {products?.map((singleProduct) => (
+            <ProductCard
+              renderAdd={true}
+              product={singleProduct}
+              key={singleProduct.id}
+            />
+          ))}
         </section>
       )}
     </>

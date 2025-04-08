@@ -27,7 +27,7 @@ function Orders() {
     } else {
       setOrders([]);
     }
-  }, []);
+  }, [user]);
 
   return (
     <LayOut>
@@ -38,7 +38,7 @@ function Orders() {
             <div style={{ padding: "20px" }}>you don't have orders yet.</div>
           )}
           {/* ordered items */}
-          <div>
+          {/* <div>
             {orders?.map((eachOrder, i) => {
               return (
                 <div key={i}>
@@ -50,7 +50,37 @@ function Orders() {
                 </div>
               );
             })}
+          </div> */}
+
+<div>
+            {orders?.map((eachOrder, i) => (
+              <div key={eachOrder.id || i}>
+                <hr />
+                <div className={classes.order_header}>
+                  <p>Order ID: {eachOrder?.id}</p>
+                  <p>Date: {new Date(eachOrder?.data?.created * 1000).toLocaleDateString()}</p>
+                </div>
+                
+                {eachOrder?.data?.basket?.map((order) => (
+                  <div className={classes.order_item} key={order.id}>
+                    <ProductCard
+                      flex={true}
+                      product={order}
+                      key={order.id}
+                    />
+                    {/* <button 
+                      className={classes.reorder_btn}
+                      onClick={() => handleReorder(order)}
+                    >
+                       Reorder
+                    </button> */}
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
+
+
         </div>
       </section>
     </LayOut>

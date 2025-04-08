@@ -1,5 +1,8 @@
 import React, { createContext, useReducer } from "react";
-// import { reducer } from "../../Utility/reducer";
+// DataProvider.js;
+export const Type = {
+  SET_USER: "SET_USER",
+};
 
 export const DataContext = createContext();
 
