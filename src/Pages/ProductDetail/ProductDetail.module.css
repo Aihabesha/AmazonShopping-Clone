@@ -84,6 +84,21 @@
   background-color: #e68900;
 }
 
+.loader_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.not_found {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 3rem;
+  color: #555;
+}
+
+
 /* ✅ Responsive Design with @media Queries */
 
 /* Medium screens (Tablets, Small Laptops) */

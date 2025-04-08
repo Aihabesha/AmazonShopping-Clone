@@ -9,17 +9,19 @@ function Product() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    axios
-      .get("https://fakestoreapi.com/products")
-      .then((res) => {
+    const fetchProducts = async () => {
+      setIsLoading(true);
+      try {
+        const res = await axios.get("https://fakestoreapi.com/products");
         setProducts(res.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("Error fetching products:", err);
+      } finally {
         setIsLoading(false);
-      });
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   return (
@@ -30,9 +32,9 @@ function Product() {
         <section className={classes.products_container}>
           {products?.map((singleProduct) => (
             <ProductCard
-              renderAdd={true}
-              product={singleProduct}
               key={singleProduct.id}
+              product={singleProduct}
+              renderAdd={true}
             />
           ))}
         </section>

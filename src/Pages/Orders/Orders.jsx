@@ -4,10 +4,12 @@ import LayOut from "../../Components/LayOut/LayOut";
 import { db } from "../../Utility/firebase";
 import { DataContext } from "../../Components/DataProvider/DataProvider";
 import ProductCard from "../../Components/Products/ProductCard";
+import Loader from "../../Components/Loader/Loader";
 
 function Orders() {
-  const [{ user }, dispatch] = useContext(DataContext);
+  const [{ user }] = useContext(DataContext);
   const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
@@ -16,16 +18,17 @@ function Orders() {
         .collection("orders")
         .orderBy("created", "desc")
         .onSnapshot((snapshot) => {
-          console.log(snapshot);
           setOrders(
             snapshot?.docs?.map((doc) => ({
               id: doc.id,
               data: doc.data(),
             }))
           );
+          setIsLoading(false);
         });
     } else {
       setOrders([]);
+      setIsLoading(false);
     }
   }, [user]);
 
@@ -34,53 +37,34 @@ function Orders() {
       <section className={classes.container}>
         <div className={classes.orders_container}>
           <h2>Your Orders</h2>
-          {orders?.length === 0 && (
-            <div style={{ padding: "20px" }}>you don't have orders yet.</div>
-          )}
-          {/* ordered items */}
-          {/* <div>
-            {orders?.map((eachOrder, i) => {
-              return (
-                <div key={i}>
-                  <hr />
-                  <p>Order Id: {eachOrder?.id}</p>
-                  {eachOrder?.data?.basket?.map((order) => (
-                    <ProductCard flex={true} product={order} key={order.id} />
-                  ))}
-                </div>
-              );
-            })}
-          </div> */}
 
-<div>
-            {orders?.map((eachOrder, i) => (
-              <div key={eachOrder.id || i}>
-                <hr />
+          {isLoading ? (
+            <div className={classes.loader_wrapper}>
+              <Loader />
+            </div>
+          ) : orders.length === 0 ? (
+            <div className={classes.no_orders}>You don't have any orders yet.</div>
+          ) : (
+            orders.map((eachOrder) => (
+              <div key={eachOrder.id} className={classes.order_block}>
                 <div className={classes.order_header}>
-                  <p>Order ID: {eachOrder?.id}</p>
-                  <p>Date: {new Date(eachOrder?.data?.created * 1000).toLocaleDateString()}</p>
+                  <p><strong>Order ID:</strong> {eachOrder.id}</p>
+                  <p><strong>Date:</strong> {new Date(eachOrder.data.created * 1000).toLocaleDateString()}</p>
                 </div>
-                
-                {eachOrder?.data?.basket?.map((order) => (
-                  <div className={classes.order_item} key={order.id}>
+
+                {eachOrder.data.basket?.map((item, index) => (
+                  <div key={item.id || index} className={classes.order_item}>
                     <ProductCard
+                      product={item}
                       flex={true}
-                      product={order}
-                      key={order.id}
+                      renderDesc={false}
+                      renderAdd={false}
                     />
-                    {/* <button 
-                      className={classes.reorder_btn}
-                      onClick={() => handleReorder(order)}
-                    >
-                       Reorder
-                    </button> */}
                   </div>
                 ))}
               </div>
-            ))}
-          </div>
-
-
+            ))
+          )}
         </div>
       </section>
     </LayOut>
